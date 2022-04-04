@@ -54,7 +54,7 @@ def ottelOszthatoHalmaz(halmazB: List[int]) -> List[int]:
     eredmeny: List[int] = []
 
     for szam in halmazB:
-        if(szam % 3 == 0):
+        if(szam % 5 == 0):
             print(szam)
         else:
             print()
@@ -70,3 +70,8 @@ print(f"\nAz A halmaz: {halmazA}")
 halmazB = halmazFeltoltese(elemSzam)
 print(f"\nA B halmaz: {halmazB}")
 
+halmazA = harommalOszthatoHalmaz(halmaz)
+print(f"\nAz A halmaz: {halmazA}")
+
+halmazB = ottelOszthatoHalmaz(halmaz)
+print(f"\nA B halmaz: {halmazB}")
