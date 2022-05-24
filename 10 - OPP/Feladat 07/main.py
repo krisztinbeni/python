@@ -8,7 +8,7 @@ tippek: Set = {10, 13, 26, 29, 55}
 kihuzottSzamok: Set[int] = set()
 talalatokSzama: int = None
 
-jatekos: Jatekos = Jatekos("János", tippek)
+jatekos: Jatekos = Jatekos("János")
 
 print(jatekos)
 print(f"Tippek: {tippek}")

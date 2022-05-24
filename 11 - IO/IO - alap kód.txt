@@ -1,0 +1,12 @@
+@staticmethod
+def read(fileName: str) -> List[Diak]:
+	oneLine: str
+	allLines: List[str] = []
+        
+	try:
+		with open(fileName, encoding='utf-8', mode="r") as file:
+			for line in file:
+				oneLine = line.strip()
+				allLines.append(oneLine)
+	except FileNotFoundError as ex:
+		print(f"{ex.filename} nem található!")
