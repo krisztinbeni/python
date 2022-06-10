@@ -4,9 +4,54 @@ def read(fileName: str) -> List[Diak]:
 	allLines: List[str] = []
         
 	try:
+	   	here: str = os.path.dirname(os.path.abspath(__file__))
+            	path: str = os.path.join(here, fileName)
+		
 		with open(fileName, encoding='utf-8', mode="r") as file:
 			for line in file:
 				oneLine = line.strip()
 				allLines.append(oneLine)
 	except FileNotFoundError as ex:
 		print(f"{ex.filename} nem található!")
+
+	varosok: List[Varos] = []
+        varos: Varos = None
+        
+        adatok: List[str] = []
+        
+        nev: str = None
+        atlag: str = None
+
+        for line in allLines:
+            adatok = line.split('\t')
+
+            nev = adatok[0]
+            atlag = float(adatok[1])
+
+            varos = Varos(nev, atlag)
+            varosok.append(varos)
+
+        return varosok
+
+    @staticmethod
+    def write(fileName: str, varosok: List[Varos]) -> None:
+        try:
+            here: str = os.path.dirname(os.path.abspath(__file__))
+            path: str = os.path.join(here, fileName)
+
+            with open(path, encoding="latin-1", mode="w") as file:
+                for varos in varosok:
+                    file.write(f"{varos.nev}\n{varos.atlag}\n")
+        except Exception as ex:
+            print(f"{ex} nem található!")
+
+
+
+diakok: List[Diak] = DiakIO.read("adatok.txt")
+
+print("A diakok adatai: \n")
+for diak in diakok:
+    print(f"{diak}\n")
+
+
+DiakIO.write("atlagfelettiek.txt", altlagfelettiek)

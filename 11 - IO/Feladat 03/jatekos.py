@@ -11,4 +11,4 @@ class Jatekos:
         self.orszag: str = orszag
 
     def __str__(self) -> str:
-        return f"{self.nev} : {self.magassag} : {self.poszt} : {self.nemzetiseg} : {self.csapat} : {self.orszag}"
+        return f"Név: {self.nev}, Magasság: {self.magassag}, Poszt: {self.poszt}, Nemzetiség: {self.nemzetiseg}, Csapat: {self.csapat}, Ország: {self.orszag}\n"

@@ -5,6 +5,7 @@ from diakio import *
 
 class Osztaly:
 
+# 3.f
     @staticmethod
     def atlag(diakok: List[Diak]) -> float:
         osszeg: float = 0
@@ -17,6 +18,7 @@ class Osztaly:
 
         return atlag
 
+# 4.f
     @staticmethod
     def legjobbak(diakok: List[Diak]) -> List[Diak]:
         joDiakok: List[Diak] = [diakok[0]]
@@ -32,6 +34,7 @@ class Osztaly:
 
         return joDiakok
 
+# 5.f
     @staticmethod
     def atlagfelettiek(diakok: List[Diak], atlag: float) -> None:
         altlagfelettiek: List[Diak] = []
@@ -42,6 +45,7 @@ class Osztaly:
 
         DiakIO.write("atlagfelettiek.txt", altlagfelettiek)
 
+# 6.f
     @staticmethod
     def vanEkitunotanulo(diakok: List[Diak]) -> Boolean:
         vanE: boolean = False
@@ -53,6 +57,7 @@ class Osztaly:
         
         return vanE
 
+# 7.f
     @staticmethod
     def atlagertekhatarok(diakok: List[Diak]) -> Dict[str, int]:
 

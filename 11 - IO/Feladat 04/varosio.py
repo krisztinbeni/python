@@ -1,16 +1,15 @@
 from statistics import mode
-from jatekos import *
-from jatekosok import *
+from varos import Varos
 from typing import *
 import os
 
-class JatekosIO:
+class VarosIO:
 
     def __init__(self) -> None:
         super().__init__()
 
     @staticmethod
-    def read(fileName: str) -> List[Jatekos]:
+    def read(fileName: str) -> List[Varos]:
         oneLine:str = None
         allLines:List[str]=[]
         
@@ -25,107 +24,96 @@ class JatekosIO:
         except FileNotFoundError as ex:
             print(f"{ex.filename} nem található!")
         
-        jatekosok: List[Jatekos] = []
-        jatekos: Jatekos = None
+        varosok: List[Varos] = []
+        varos: Varos = None
         
         adatok: List[str] = []
         
         nev: str = None
-        magassag: int = None
-        poszt: str = None
-        nemzetiseg: str = None
-        csapat: str = None
-        orszag: str = None
+        varostipus: str = None
+        megye: str = None
+        jaras: str = None
+        kisterseg: str = None
+        nepesseg: int = None
+        terulet: float = None
 
         for line in allLines:
             adatok = line.split('\t')
 
             nev = adatok[0]
-            magassag = int(adatok[1])
-            poszt = adatok[2]
-            nemzetiseg = adatok[3]
-            csapat = adatok[4]
-            orszag = adatok[5]
+            varostipus = adatok[1]
+            megye = adatok[2]
+            jaras = adatok[3]
+            kisterseg = adatok[4]
+            nepesseg = int(adatok[5])
+            terulet = float(adatok[6])
 
-            konyv = Jatekos(nev, magassag, poszt, nemzetiseg, csapat, orszag)
-            jatekosok.append(jatekos)
+            varos = Varos(nev, varostipus, megye, jaras, kisterseg, nepesseg, terulet)
+            varosok.append(varos)
 
-        return jatekosok
+        return varosok
 
 # 2.f
     @staticmethod
-    def utokwrite(fileName: str, jatekosok: List[Jatekos]) -> None:
+    def megyejoguvaroswrite(fileName: str, varosok: List[Varos]) -> None:
         try:
             here: str = os.path.dirname(os.path.abspath(__file__))
             path: str = os.path.join(here, fileName)
 
             with open(path, encoding="latin-1", mode="w") as file:
-                for jatekos in jatekosok:
-                    file.write(f"{jatekos.nev}\t{jatekos.magassag}\n{jatekos.poszt}\n{jatekos.nemzetiseg}\n{jatekos.csapat}\n{jatekos.orszag}\n")
+                for varos in varosok:
+                    file.write(f"{varos.nev}\n")
         except Exception as ex:
             print(f"{ex} nem található!")
 
 # 3.f
     @staticmethod
-    def csapattagokwrite(fileName: str, jatekosok: List[Jatekos]) -> None:
+    def nepessegErtekekkozottwrite(fileName: str, varosok: List[Varos]) -> None:
         try:
             here: str = os.path.dirname(os.path.abspath(__file__))
             path: str = os.path.join(here, fileName)
 
             with open(path, encoding="latin-1", mode="w") as file:
-                for jatekos in jatekosok:
-                    file.write(f"{jatekos.csapat}\t{jatekos.nev}\n")
+                for varos in varosok:
+                    file.write(f"{varos.nev}\n{varos.varostipus}\n{varos.megye}\n{varos.jaras}\n{varos.kisterseg}\n{varos.nepesseg}\n{varos.terulet}\n")
         except Exception as ex:
             print(f"{ex} nem található!")
 
 # 4.f
     @staticmethod
-    def magassagSorrendwrite(fileName: str, magassag: List[Jatekos]) -> None:
+    def nagyteruletuVarosokwrite(fileName: str, varosok: List[Varos]) -> None:
         try:
             here: str = os.path.dirname(os.path.abspath(__file__))
             path: str = os.path.join(here, fileName)
 
             with open(path, encoding="latin-1", mode="w") as file:
-                for jatekos in magassag:
-                    file.write(f"{jatekos.nev}\t{jatekos.magassag}\n")
+                for varos in varosok:
+                    file.write(f"{varos.nev}\n")
         except Exception as ex:
             print(f"{ex} nem található!")
 
 # 5.f
     @staticmethod
-    def nemzetisegwrite(fileName: str, jatekosok: List[Jatekos]) -> None:
+    def bekesmegyeTelepuleswrite(fileName: str, varosok: List[Varos]) -> None:
         try:
             here: str = os.path.dirname(os.path.abspath(__file__))
             path: str = os.path.join(here, fileName)
 
             with open(path, encoding="latin-1", mode="w") as file:
-                for jatekos in jatekosok:
-                    file.write(f"{jatekos.nemzetiseg}\t{jatekos.nev}\n{jatekos.poszt}\n")
+                for varos in varosok:
+                    file.write(f"{varos.nev}\n")
         except Exception as ex:
             print(f"{ex} nem található!")
 
 # 6.f
     @staticmethod
-    def atlagmagassagwrite(fileName: str, jatekosok: List[Jatekos]) -> None:
+    def megyeEsTeruletwrite(fileName: str, varosok: List[Varos]) -> None:
         try:
             here: str = os.path.dirname(os.path.abspath(__file__))
             path: str = os.path.join(here, fileName)
 
             with open(path, encoding="latin-1", mode="w") as file:
-                for jatekos in jatekosok:
-                    file.write(f"{jatekos.nev}\t{jatekos.magassag}\n")
-        except Exception as ex:
-            print(f"{ex} nem található!")
-
-# 8.f
-    @staticmethod
-    def nemzetisegwrite(fileName: str, jatekosok: List[Jatekos]) -> None:
-        try:
-            here: str = os.path.dirname(os.path.abspath(__file__))
-            path: str = os.path.join(here, fileName)
-
-            with open(path, encoding="latin-1", mode="w") as file:
-                for jatekos in jatekosok:
-                    file.write(f"{jatekos.nev}\t{jatekos.magassag}\n")
+                for varos in varosok:
+                    file.write(f"{varos.nev}\n{varos.terulet}\n")
         except Exception as ex:
             print(f"{ex} nem található!")
